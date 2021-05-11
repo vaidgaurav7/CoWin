@@ -15,9 +15,14 @@ response = requests.get(f"https://cdn-api.co-vin.in/api/v2/appointment/sessions/
 #print(pprint.pformat(response.json()))
 print("\nBY DISTRICT::\n")
 for center in response.json()['centers']:
+    print('#'*20)
+    print('Name : ', center.get('name',None))
+    print('Address : ', center.get('address',None))
     for session in center['sessions']:
         if session['min_age_limit'] == 18 and session['available_capacity'] > 0:
-            print(center)
+            #print(center)
+            print('Date : ',session.get('date',None),' Available Capacity : ',session.get('available_capacity',None),' Vaccine : ', session.get('vaccine',None))
+            print('Slots : ', session.get('slots',None))
 
 
 pincode = 110001 ####### change your pincode here
@@ -27,7 +32,11 @@ url = f"https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByP
 print("\nBY PINCODE::\n")
 response = requests.get(url, headers=headers)
 for center in response.json()['centers']:
+    print('#'*20)
+    print('Name : ', center.get('name',None))
+    print('Address : ', center.get('address',None))
     for session in center['sessions']:
-        if session['min_age_limit'] == 18 and session['available_capacity'] > 0:
-            print(center)
+        if  session['min_age_limit'] == 18 and session['available_capacity'] > 0:
+            print('Date : ',session.get('date',None),' Available Capacity : ',session.get('available_capacity',None),' Vaccine : ', session.get('vaccine',None))
+            print('Slots : ', session.get('slots',None))
 
